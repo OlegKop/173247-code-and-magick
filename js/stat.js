@@ -47,7 +47,10 @@ window.renderStatistics = function (ctx, names, times) {
       b = blue;
     return '#' + r.toString(16) + g.toString(16) + b.toString(16);
   };
-
+  var timeTotal = function() {
+    var timeTotal = Math.round((barHeight * times[i]) / maxTime);
+    return timeTotal;
+  };
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y + gistograma.HEIGHT + gistograma.FONT * 2);
@@ -56,7 +59,9 @@ window.renderStatistics = function (ctx, names, times) {
     } else {
       ctx.fillStyle = randColor(255);
     }
-    ctx.fillRect(cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y - cloud.GAP * 2 + gistograma.HEIGHT + gistograma.FONT * 2, gistograma.WIDTH, -((barHeight * times[i]) / maxTime), gistograma.WIDTH);
+    ctx.fillRect(cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y - cloud.GAP * 2 + gistograma.HEIGHT + gistograma.FONT * 2, gistograma.WIDTH, -timeTotal());
+    ctx.fillStyle = '#000';
+    ctx.fillText(timeTotal(), cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.HEIGHT - timeTotal() - gistograma.FONT);
   }
 };
 
