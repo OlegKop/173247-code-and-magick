@@ -41,15 +41,18 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 110, 50);
   ctx.fillText('Список результатов:', 110, 70);
   var maxTime = getMaxElement(times);
-  var randColor = function (blue) {
-    var r = Math.floor(Math.random() * (256)),
-      g = Math.floor(Math.random() * (256)),
-      b = blue;
-    return '#' + r.toString(16) + g.toString(16) + b.toString(16);
+  var randColor = function () {
+    var red;
+    var green;
+    var blue;
+    red = Math.floor(Math.random() * (256));
+    green = Math.floor(Math.random() * (256));
+    blue = 255;
+    return '#' + red.toString(16) + green.toString(16) + blue.toString(16);
   };
-  var timeTotal = function() {
-    var timeTotal = Math.round((barHeight * times[i]) / maxTime);
-    return timeTotal;
+  var timeTotal = function () {
+    var Total = Math.round((barHeight * times[i]) / maxTime);
+    return Total;
   };
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000';
@@ -57,7 +60,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = randColor(255);
+      ctx.fillStyle = randColor();
     }
     ctx.fillRect(cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y - cloud.GAP * 2 + gistograma.HEIGHT + gistograma.FONT * 2, gistograma.WIDTH, -timeTotal());
     ctx.fillStyle = '#000';
