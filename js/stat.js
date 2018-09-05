@@ -56,7 +56,7 @@ var randomColor = function () {
   if (green === 0) {
     green = Math.floor(Math.random() * (256));
   }
-  if (blue === 0) {
+  if (blue !== 255) {
     blue = Math.floor(Math.random() * (256));
   }
 
