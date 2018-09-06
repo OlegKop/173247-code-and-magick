@@ -105,9 +105,9 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var renderX = cloud.x + gistograma.width + (gistograma.font + gistograma.width) * i;
     var renderY = cloud.y + gistograma.height + gistograma.font * 2;
-    var renderColor = '#000';  
+    var renderColor = '#000';
     renderPlayer(ctx, names[i], renderX, renderY, renderColor);
-    renderChart(ctx, names[i], renderX, renderY - cloud.gap * 2, gistograma.width, - timeTotal());
+    renderChart(ctx, names[i], renderX, renderY - cloud.gap * 2, gistograma.width, -timeTotal());
     renderTimeTotal(ctx, times[i], renderX, cloud.height - gistograma.font - timeTotal(), renderColor);
   }
 };
