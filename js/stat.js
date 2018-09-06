@@ -1,24 +1,24 @@
 'use strict';
 
 var cloud = {
-  X: 100,
-  Y: 10,
-  WIDTH: 420,
-  HEIGHT: 270,
-  GAP: 10
+  x: 100,
+  y: 10,
+  width: 420,
+  height: 270,
+  gap: 10
 };
 
 var gistograma = {
-  WIDTH: 40,
-  HEIGHT: 150,
-  FONT: 50
+  width: 40,
+  height: 150,
+  font: 50
 };
 
-var barHeight = cloud.HEIGHT - cloud.GAP * 2 - gistograma.HEIGHT;
+var barheight = cloud.height - cloud.gap * 2 - gistograma.height;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, cloud.WIDTH, cloud.HEIGHT);
+  ctx.fillRect(x, y, cloud.width, cloud.height);
 };
 
 var renderTitle = function (ctx, texts, x, y, color) {
@@ -40,24 +40,24 @@ var getMaxElement = function (arr) {
 };
 
 var colorRgb = {
-  RED: 0,
-  GREEN: 0,
-  BLUE: 255
+  red: 0,
+  green: 0,
+  blue: 255
 };
 
 var randomColor = function () {
-  var red = colorRgb.RED;
-  var green = colorRgb.GREEN;
-  var blue = colorRgb.BLUE;
-  if (red === 0) {
-    red = Math.floor(Math.random() * (256))
+  var red = colorRgb.red;
+  var green = colorRgb.green;
+  var blue = colorRgb.blue;
+  if (red !== 0) {
+    red = Math.floor(Math.random() * 256)
     ;
   }
-  if (green === 0) {
-    green = Math.floor(Math.random() * (256));
+  if (green !== 0) {
+    green = Math.floor(Math.random() * 256);
   }
-  if (blue !== 255) {
-    blue = Math.floor(Math.random() * (256));
+  if (blue === 255) {
+    blue = Math.floor(Math.random() * 256);
   }
 
   return '#' + red.toString(16) + green.toString(16) + blue.toString(16);
@@ -69,6 +69,7 @@ var getRandomColor = function (ctx, names) {
   } else {
     ctx.fillStyle = randomColor();
   }
+  return ctx.fillStyle;
 };
 
 var renderColumn = function (ctx, x, y, width, height) {
@@ -91,20 +92,23 @@ var renderChart = function (ctx, names, x, y, width, height) {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, cloud.X + cloud.GAP, cloud.Y + cloud.GAP, 'rgba(0, 0, 0, 0.7)');
-  renderCloud(ctx, cloud.X, cloud.Y, '#fff');
-  renderTitle(ctx, 'Ура вы победили!', cloud.X + cloud.GAP, cloud.Y * 5, '#000');
-  renderTitle(ctx, 'Список результатов:', cloud.X + cloud.GAP, cloud.Y * 7, '#000');
+  renderCloud(ctx, cloud.x + cloud.gap, cloud.y + cloud.gap, 'rgba(0, 0, 0, 0.7)');
+  renderCloud(ctx, cloud.x, cloud.y, '#fff');
+  renderTitle(ctx, 'Ура вы победили!', cloud.x + cloud.gap, cloud.y * 5, '#000');
+  renderTitle(ctx, 'Список результатов:', cloud.x + cloud.gap, cloud.y * 7, '#000');
   var maxTime = getMaxElement(times);
   var timeTotal = function () {
-    var Total = Math.round((barHeight * times[i]) / maxTime);
+    var Total = Math.round((barheight * times[i]) / maxTime);
     return Total;
   };
 
   for (var i = 0; i < names.length; i++) {
-    renderPlayer(ctx, names[i], cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y + gistograma.HEIGHT + gistograma.FONT * 2, '#000');
-    renderChart(ctx, names[i], cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.Y - cloud.GAP * 2 + gistograma.HEIGHT + gistograma.FONT * 2, gistograma.WIDTH, -timeTotal());
-    renderTimeTotal(ctx, times[i], cloud.X + gistograma.WIDTH + (gistograma.FONT + gistograma.WIDTH) * i, cloud.HEIGHT - gistograma.FONT - timeTotal(), '#000');
+    var renderX = cloud.x + gistograma.width + (gistograma.font + gistograma.width) * i;
+    var renderY = cloud.y + gistograma.height + gistograma.font * 2;
+    var renderColor = '#000';  
+    renderPlayer(ctx, names[i], renderX, renderY, renderColor);
+    renderChart(ctx, names[i], renderX, renderY - cloud.gap * 2, gistograma.width, - timeTotal());
+    renderTimeTotal(ctx, times[i], renderX, cloud.height - gistograma.font - timeTotal(), renderColor);
   }
 };
 
