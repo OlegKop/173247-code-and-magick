@@ -39,35 +39,30 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var colorRgb = {
-  red: 0,
-  green: 0,
-  blue: 255
+var colorRgb = [0, 0, 255];
+
+var randomInteger = function () {
+  var colorInteger = Math.floor(Math.random() * 256);
+  return colorInteger;
 };
 
-var randomColor = function () {
-  var red = colorRgb.red;
-  var green = colorRgb.green;
-  var blue = colorRgb.blue;
-  if (red !== 0) {
-    red = Math.floor(Math.random() * 256)
-    ;
+var randomColor = function (arr) {
+  var colorStr = '';
+  for (var i = 0; i < arr.length; i++) {
+    if (colorRgb[i] > 0) {
+      colorStr += randomInteger().toString(16);
+    } else {
+      colorStr += '0' + colorRgb[i].toString(16);
+    }
   }
-  if (green !== 0) {
-    green = Math.floor(Math.random() * 256);
-  }
-  if (blue === 255) {
-    blue = Math.floor(Math.random() * 256);
-  }
-
-  return '#' + red.toString(16) + green.toString(16) + blue.toString(16);
+  return '#' + colorStr;
 };
 
 var getRandomColor = function (ctx, names) {
   if (names === 'Вы') {
     ctx.fillStyle = 'rgba(255, 0, 0, 1)';
   } else {
-    ctx.fillStyle = randomColor();
+    ctx.fillStyle = randomColor(colorRgb);
   }
   return ctx.fillStyle;
 };
