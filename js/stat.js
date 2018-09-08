@@ -58,13 +58,12 @@ var randomColor = function (arr) {
   return '#' + colorStr;
 };
 
-var getRandomColor = function (ctx, names) {
-  if (names === 'Вы') {
+var setRandomColor = function (ctx, name) {
+  if (name === 'Вы') {
     ctx.fillStyle = 'rgba(255, 0, 0, 1)';
   } else {
     ctx.fillStyle = randomColor(colorRgb);
   }
-  return ctx.fillStyle;
 };
 
 var renderColumn = function (ctx, x, y, width, height) {
@@ -81,8 +80,8 @@ var renderPlayer = function (ctx, players, x, y, color) {
   ctx.fillText(players, x, y);
 };
 
-var renderChart = function (ctx, names, x, y, width, height) {
-  getRandomColor(ctx, names);
+var renderChart = function (ctx, name, x, y, width, height) {
+  setRandomColor(ctx, name);
   renderColumn(ctx, x, y, width, height);
 };
 
@@ -93,8 +92,8 @@ window.renderStatistics = function (ctx, names, times) {
   renderTitle(ctx, 'Список результатов:', cloud.x + cloud.gap, cloud.y * 7, '#000');
   var maxTime = getMaxElement(times);
   var timeTotal = function () {
-    var Total = Math.round((barheight * times[i]) / maxTime);
-    return Total;
+    var total = Math.round((barheight * times[i]) / maxTime);
+    return total;
   };
 
   for (var i = 0; i < names.length; i++) {
