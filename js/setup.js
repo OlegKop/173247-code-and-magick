@@ -100,11 +100,6 @@ userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
-
-// Нажатие на элемент .setup-open удаляет класс hidden
-// у блока setup. Нажатие на элемент .setup-close, расположенный
-// внутри блока setup возвращает ему класс hidden.
-
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
@@ -167,7 +162,6 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
-
 
 wizardCoat.addEventListener('click', function () {
   wizardCoat.style.fill = pickRandomElement(coatColor);
