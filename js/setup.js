@@ -57,14 +57,12 @@ var createRandomWizards = function (magicName, magicLastName, magicCoatColor, ma
   var magics = [];
   for (var j = 1; j <= 5; j++) {
     magics.push(magic);
-
     for (var i = 0; i <= j; i++) {
       var firstName = pickRandomElement(magicName);
       lastName = pickRandomElement(magicLastName);
       var nameFull = firstName + ' ' + lastName;
       coatColor = pickRandomElement(magicCoatColor);
       var wizardeyesColor = pickRandomElement(magicEyesColor);
-
       var magic = getRandomWizard(nameFull, coatColor, wizardeyesColor);
     }
     magicName.splice(magicName.indexOf(firstName), 1);
@@ -80,11 +78,9 @@ var wizards = createRandomWizards(firstname, lastName, coatColor, eyesColor);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
-
   return wizardElement;
 };
 
@@ -109,6 +105,7 @@ var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
 var setupUserName = setup.querySelector('.setup-user-name');
+var setupOverlay = document.querySelector('.overlay');
 
 coatColor = [
   'rgb(101, 137, 164)',
@@ -136,6 +133,7 @@ var onPopupEscPress = function (evt) {
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+  setupOverlay.removeAttribute('style');
 };
 
 var closePopup = function () {
@@ -169,13 +167,11 @@ wizardCoat.addEventListener('click', function () {
 });
 
 wizardEyes.addEventListener('click', function () {
-
   wizardEyes.style.fill = pickRandomElement(eyesColor);
   setupWizardAppearance.querySelectorAll('input')[1].value = wizardEyes.style.fill;
 });
 
 setupFireball.addEventListener('click', function () {
-
   setupFireball.querySelector('input').value = pickRandomElement(fireballColor);
   setupFireball.style.background = setupFireball.querySelector('input').value;
 });
