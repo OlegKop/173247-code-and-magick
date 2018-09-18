@@ -40,10 +40,7 @@
 
   var colorRgb = [0, 0, 255];
 
-  var randomInteger = function () {
-    var colorInteger = Math.floor(Math.random() * 256);
-    return colorInteger;
-  };
+  var randomInteger = window.randomInteger();
 
   var randomColor = function (arr) {
     var colorStr = '';

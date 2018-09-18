@@ -43,11 +43,6 @@
 
   var eyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
 
-  var pickRandomElement = function (element) {
-    var randElement = element[Math.floor(Math.random() * element.length)];
-    return randElement;
-  };
-
   var getRandomWizard = function (magicFullName, magicCoatColor, magicEyesColor) {
     var wizard = {name: magicFullName, coatColor: magicCoatColor, eyesColor: magicEyesColor};
     return wizard;
@@ -58,11 +53,11 @@
     for (var j = 1; j <= 5; j++) {
       magics.push(magic);
       for (var i = 0; i <= j; i++) {
-        var firstName = pickRandomElement(magicName);
-        lastName = pickRandomElement(magicLastName);
+        var firstName = window.pickRandomElement(magicName);
+        lastName = window.pickRandomElement(magicLastName);
         var nameFull = firstName + ' ' + lastName;
-        coatColor = pickRandomElement(magicCoatColor);
-        var wizardeyesColor = pickRandomElement(magicEyesColor);
+        coatColor = window.pickRandomElement(magicCoatColor);
+        var wizardeyesColor = window.pickRandomElement(magicEyesColor);
         var magic = getRandomWizard(nameFull, coatColor, wizardeyesColor);
       }
       magicName.splice(magicName.indexOf(firstName), 1);
@@ -162,17 +157,17 @@
   });
 
   wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = pickRandomElement(coatColor);
+    wizardCoat.style.fill = window.pickRandomElement(coatColor);
     setupWizardAppearance.querySelectorAll('input')[0].value = wizardCoat.style.fill;
   });
 
   wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = pickRandomElement(eyesColor);
+    wizardEyes.style.fill = window.pickRandomElement(eyesColor);
     setupWizardAppearance.querySelectorAll('input')[1].value = wizardEyes.style.fill;
   });
 
   setupFireball.addEventListener('click', function () {
-    setupFireball.querySelector('input').value = pickRandomElement(fireballColor);
+    setupFireball.querySelector('input').value = window.pickRandomElement(fireballColor);
     setupFireball.style.background = setupFireball.querySelector('input').value;
   });
 })();
